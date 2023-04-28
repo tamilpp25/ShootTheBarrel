@@ -50,7 +50,6 @@ public class FireWeapon : MonoBehaviour
                 {
                     hitInfo.rigidbody.AddForce(-hitInfo.normal * hitForce);
                     GameObject explode = Instantiate(explosionPrefab, hitInfo.transform.position, Quaternion.identity);
-                    explode.GetComponent<Transform>().SetParent(bulletPos.transform);
                     Destroy(hitInfo.rigidbody.gameObject);
                     Destroy(explode, 2f);
                     //Debug.Log("HITTED BARREL");
