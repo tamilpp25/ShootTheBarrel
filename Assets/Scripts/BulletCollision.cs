@@ -6,6 +6,7 @@ public class BulletCollision : MonoBehaviour
 {
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.tag != "Damagable")
         Debug.Log("Collision detected! destroying..");
         Destroy(this.gameObject);
     }

@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public int points = 0;
     public int barrelsBroken = 0;
     public int barrlsToBreak = 0;
+    public GameState state = GameState.RUNNING;
     public static GameManager instance;
     private bool gameEnded = false;
     public Difficulty difficulty = Difficulty.EASY;
@@ -64,32 +65,37 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!gameEnded)
+        if(state == GameState.RUNNING)
         {
-            if ((timer - DateTime.Now).Seconds < 0)
+            if (!gameEnded)
             {
-                gameEnded = true;
-                Debug.Log("Ended! Points: " + points);
+                if ((timer - DateTime.Now).Seconds < 0)
+                {
+                    gameEnded = true;
+                    Debug.Log("Ended! Points: " + points);
+                    state = GameState.ENDED;
+                }
+                else
+                {
+                    if (barrlsToBreak == barrelsBroken)
+                    {
+                        gameEnded = true;
+                        points += CalculateTimeRemainingPoints();
+                        Debug.Log("Ended! Points: " + points);
+                        state = GameState.ENDED;
+                    }
+                }
+
+                // In progress
             }
             else
             {
-                if (barrlsToBreak == barrelsBroken)
-                {
-                    gameEnded = true;
-                    points += CalculateTimeRemainingPoints();
-                    Debug.Log("Ended! Points: " + points);
-                }
+                //Game ended display score
+                Debug.Log("Score: " + points);
+                return;
             }
-
-
-            // In progress
         }
-        else
-        {
-            //Game ended display score
-            Debug.Log("Score: " + points);
-            return;
-        }
+        
 
 
     }
@@ -174,6 +180,12 @@ public class GameManager : MonoBehaviour
         EASY,
         MEDIUM,
         HARD
+    }
+
+    public enum GameState
+    {
+        RUNNING,
+        ENDED
     }
 
     private DateTime generateTimeLeft(Difficulty diff)

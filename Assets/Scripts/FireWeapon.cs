@@ -56,6 +56,7 @@ public class FireWeapon : MonoBehaviour
                     Debug.Log("HITTED BARREL");
                     GameManager.instance.points++;
                     GameManager.instance.CalculatePoints();
+                    GameManager.instance.barrelsBroken++;
                 }
             }
         }
