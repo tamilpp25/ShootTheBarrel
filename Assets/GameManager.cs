@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public GameState state = GameState.RUNNING;
     public static GameManager instance;
     private bool gameEnded = false;
-    public Difficulty difficulty = Difficulty.EASY;
+    public Difficulty difficulty = Difficulty.HARD;
     private Vector3[] positions = new Vector3[20]
     {
         new Vector3(-8,0,-1),
