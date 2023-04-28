@@ -30,7 +30,7 @@ public class FireWeapon : MonoBehaviour
     {
         if (inputs.shoot)
         {
-            Debug.Log("SHOT!");
+            //Debug.Log("SHOT!");
             inputs.shoot = false;
 
             GameObject firedBullet = Instantiate(bullet, bulletPos.transform.position, bulletPos.transform.rotation);
@@ -46,14 +46,14 @@ public class FireWeapon : MonoBehaviour
             RaycastHit hitInfo;
             if (Physics.Raycast(cameraPos.position, cameraPos.forward, out hitInfo, rayCastRange))
             {
-                if(hitInfo.rigidbody != null && hitInfo.transform.gameObject.tag == "Damagable")
+                if(hitInfo.rigidbody != null && hitInfo.transform.gameObject.tag == "Damagable" && GameManager.instance.state == GameManager.GameState.RUNNING)
                 {
                     hitInfo.rigidbody.AddForce(-hitInfo.normal * hitForce);
                     GameObject explode = Instantiate(explosionPrefab, hitInfo.transform.position, Quaternion.identity);
                     explode.GetComponent<Transform>().SetParent(bulletPos.transform);
-                    Destroy(hitInfo.rigidbody.gameObject, 0.5f);
+                    Destroy(hitInfo.rigidbody.gameObject);
                     Destroy(explode, 2f);
-                    Debug.Log("HITTED BARREL");
+                    //Debug.Log("HITTED BARREL");
                     GameManager.instance.points++;
                     GameManager.instance.CalculatePoints();
                     GameManager.instance.barrelsBroken++;

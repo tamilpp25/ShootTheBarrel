@@ -43,6 +43,9 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Development build
+        Debug.developerConsoleVisible = true;
+
         instance = this;
         points = 0;
         Debug.Log("Starting game with difficulty: " + difficulty);
@@ -67,12 +70,13 @@ public class GameManager : MonoBehaviour
     {
         if(state == GameState.RUNNING)
         {
+            Debug.Log("Time left: " + (timer - DateTime.Now).Seconds + "s");
             if (!gameEnded)
             {
-                if ((timer - DateTime.Now).Seconds < 0)
+                if ((timer - DateTime.Now).Seconds <= 0)
                 {
                     gameEnded = true;
-                    Debug.Log("Ended! Points: " + points);
+                    Debug.Log("Time over! Game ended! Points: " + points);
                     state = GameState.ENDED;
                 }
                 else
@@ -81,7 +85,7 @@ public class GameManager : MonoBehaviour
                     {
                         gameEnded = true;
                         points += CalculateTimeRemainingPoints();
-                        Debug.Log("Ended! Points: " + points);
+                        Debug.Log("You won! Points: " + points);
                         state = GameState.ENDED;
                     }
                 }
@@ -92,12 +96,8 @@ public class GameManager : MonoBehaviour
             {
                 //Game ended display score
                 Debug.Log("Score: " + points);
-                return;
             }
         }
-        
-
-
     }
 
     public void CalculatePoints()
