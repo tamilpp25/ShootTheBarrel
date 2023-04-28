@@ -289,7 +289,7 @@ MonoBehaviour:
   barrelsBroken: 0
   barrlsToBreak: 0
   state: 0
-  difficulty: 0
+  difficulty: 2
   redBarrelPrefab: {fileID: 108448, guid: 750b375c2ad1a1a4480e0d9063412e52, type: 3}
   yellowBarrelPrefab: {fileID: 116512, guid: a25fc0c32c89e2243a21307d45b09ceb, type: 3}
 --- !u!4 &367491105
