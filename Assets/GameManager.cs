@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -40,6 +41,13 @@ public class GameManager : MonoBehaviour
     public GameObject redBarrelPrefab;
     public GameObject yellowBarrelPrefab;
 
+    [SerializeField]
+    private TMP_Text scoreDisplay;
+    [SerializeField]
+    private TMP_Text timeDisplay;
+    [SerializeField]
+    private TMP_Text progressDisplay;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -70,6 +78,9 @@ public class GameManager : MonoBehaviour
     {
         if(state == GameState.RUNNING)
         {
+            timeDisplay.text = String.Format("Time left: {0}s", (timer - DateTime.Now).Seconds);
+            progressDisplay.text = String.Format("{0}/{1}", barrelsBroken, barrlsToBreak);
+
             Debug.Log("Time left: " + (timer - DateTime.Now).Seconds + "s");
             if (!gameEnded)
             {
@@ -77,7 +88,10 @@ public class GameManager : MonoBehaviour
                 {
                     gameEnded = true;
                     Debug.Log("Time over! Game ended! Points: " + points);
+                    scoreDisplay.text = String.Format("Game Over!\nScore: {0}", points);
+                    scoreDisplay.gameObject.SetActive(true);
                     state = GameState.ENDED;
+                    GameObject.Find("Crosshair").SetActive(false);
                 }
                 else
                 {
@@ -85,8 +99,11 @@ public class GameManager : MonoBehaviour
                     {
                         gameEnded = true;
                         points += CalculateTimeRemainingPoints();
+                        scoreDisplay.text = String.Format("Game Over!\nScore: {0}", points);
+                        scoreDisplay.gameObject.SetActive(true);
                         Debug.Log("You won! Points: " + points);
                         state = GameState.ENDED;
+                        GameObject.Find("Crosshair").SetActive(false);
                     }
                 }
 

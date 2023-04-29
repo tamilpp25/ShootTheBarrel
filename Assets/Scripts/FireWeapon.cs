@@ -1,6 +1,7 @@
 using UnityEngine.InputSystem;
 using UnityEngine;
 using StarterAssets;
+using TMPro;
 
 public class FireWeapon : MonoBehaviour
 {

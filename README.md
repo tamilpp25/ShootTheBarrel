@@ -7,7 +7,7 @@
 
 # TodoList
 - [x] Basic Gameplay
-- [ ] UI
+- [x] UI
 - [ ] Restart Game option
 - [ ] Music
 - [ ] Previous stats display
