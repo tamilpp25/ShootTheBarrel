@@ -3,7 +3,7 @@
 - Run this project on UnityEditor while inspecting GameManager object for viewing stats (since UI not done yet)
 
 # Download
-- Download the built game by clicking [here](https://files.tamilpp25.me/d/Public/Games/ShootTheBarrel.zip)
+- Download the built game by clicking [here](https://s3.tamil.moe/games/client/download/release/pc/ShootTheBarrel.zip)
 
 # TodoList
 - [x] Basic Gameplay
